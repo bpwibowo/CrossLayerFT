@@ -1,0 +1,94 @@
+.PHONY: base.run
+base.run:
+	$(PREFIX) ./run.py --toolflags="$(WARM_FLAG) $(SIM_FLAG) $(TOOL_FLAGS)" --cfg $(CORE_CFG) --tool $(TOOL) $(RUN_FLAGS) --chkpt $(CHKPT) --sim_res_data $(SIM_DATA) $(APP)
+
+.PHONY: base.run
+base.run.chkpt0:
+	$(PREFIX) ./run.py --toolflags="$(SIM_FLAG) $(TOOL_FLAGS)" --cfg $(CORE_CFG) --tool $(TOOL) $(RUN_FLAGS) --chkpt 0 --sim_res_data $(SIM_DATA) $(APP)
+
+222.montecarlo.run:
+	make $(MAKE_FLAGS) base.run CHKPT=2 APP=222.montecarlo
+	make $(MAKE_FLAGS) base.run CHKPT=1 APP=222.montecarlo
+	make $(MAKE_FLAGS) base.run CHKPT=5 APP=222.montecarlo
+	make $(MAKE_FLAGS) base.run CHKPT=7 APP=222.montecarlo
+	make $(MAKE_FLAGS) base.run.chkpt0 APP=222.montecarlo
+
+401.bzip2.run:
+	make $(MAKE_FLAGS) base.run CHKPT=10 APP=401.bzip2
+	make $(MAKE_FLAGS) base.run CHKPT=1 APP=401.bzip2
+	make $(MAKE_FLAGS) base.run CHKPT=3 APP=401.bzip2
+	make $(MAKE_FLAGS) base.run CHKPT=4 APP=401.bzip2
+	make $(MAKE_FLAGS) base.run CHKPT=5 APP=401.bzip2
+
+403.gcc.run:
+	make $(MAKE_FLAGS) base.run CHKPT=6 APP=403.gcc
+	make $(MAKE_FLAGS) base.run CHKPT=2 APP=403.gcc
+	make $(MAKE_FLAGS) base.run CHKPT=8 APP=403.gcc
+	make $(MAKE_FLAGS) base.run CHKPT=5 APP=403.gcc
+	make $(MAKE_FLAGS) base.run CHKPT=3 APP=403.gcc
+
+429.mcf.run:
+	make $(MAKE_FLAGS) base.run CHKPT=10 APP=429.mcf #PREFIX="$(PREFIX_MCF_LARGE)"
+	make $(MAKE_FLAGS) base.run CHKPT=2 APP=429.mcf #PREFIX="$(PREFIX_MCF_SMALL)"
+	make $(MAKE_FLAGS) base.run CHKPT=3 APP=429.mcf #PREFIX="$(PREFIX_MCF_MEDIUM)"
+	make $(MAKE_FLAGS) base.run CHKPT=11 APP=429.mcf #PREFIX="$(PREFIX_MCF_SMALL)"
+	make $(MAKE_FLAGS) base.run CHKPT=5 APP=429.mcf #PREFIX="$(PREFIX_MCF_SMALL)"
+	make $(MAKE_FLAGS) base.run CHKPT=4 APP=429.mcf #PREFIX="$(PREFIX_MCF_SMALL)"
+
+445.gobmk.run:
+	make $(MAKE_FLAGS) base.run CHKPT=4 APP=445.gobmk
+	make $(MAKE_FLAGS) base.run CHKPT=1 APP=445.gobmk
+	make $(MAKE_FLAGS) base.run CHKPT=8 APP=445.gobmk
+	make $(MAKE_FLAGS) base.run CHKPT=10 APP=445.gobmk
+	make $(MAKE_FLAGS) base.run CHKPT=11 APP=445.gobmk
+	make $(MAKE_FLAGS) base.run CHKPT=2 APP=445.gobmk
+
+456.hmmer.run:
+	make $(MAKE_FLAGS) base.run CHKPT=7 APP=456.hmmer
+	make $(MAKE_FLAGS) base.run CHKPT=4 APP=456.hmmer
+	make $(MAKE_FLAGS) base.run CHKPT=5 APP=456.hmmer
+	make $(MAKE_FLAGS) base.run CHKPT=3 APP=456.hmmer
+	make $(MAKE_FLAGS) base.run CHKPT=8 APP=456.hmmer
+
+458.sjeng.run:
+	make $(MAKE_FLAGS) base.run CHKPT=8 APP=458.sjeng
+	make $(MAKE_FLAGS) base.run CHKPT=9 APP=458.sjeng
+	make $(MAKE_FLAGS) base.run CHKPT=2 APP=458.sjeng
+	make $(MAKE_FLAGS) base.run CHKPT=1 APP=458.sjeng
+	make $(MAKE_FLAGS) base.run CHKPT=5 APP=458.sjeng
+
+462.libquantum.run:
+	make $(MAKE_FLAGS) base.run CHKPT=9 APP=462.libquantum
+	make $(MAKE_FLAGS) base.run CHKPT=3 APP=462.libquantum
+	make $(MAKE_FLAGS) base.run CHKPT=4 APP=462.libquantum
+	make $(MAKE_FLAGS) base.run CHKPT=2 APP=462.libquantum
+	make $(MAKE_FLAGS) base.run CHKPT=11 APP=462.libquantum
+	make $(MAKE_FLAGS) base.run CHKPT=5 APP=462.libquantum
+
+464.h264ref.run:
+	make $(MAKE_FLAGS) base.run CHKPT=5 APP=464.h264ref
+	make $(MAKE_FLAGS) base.run CHKPT=6 APP=464.h264ref
+	make $(MAKE_FLAGS) base.run CHKPT=10 APP=464.h264ref
+	make $(MAKE_FLAGS) base.run CHKPT=3 APP=464.h264ref
+	make $(MAKE_FLAGS) base.run CHKPT=2 APP=464.h264ref
+	make $(MAKE_FLAGS) base.run CHKPT=9 APP=464.h264ref
+
+471.omnetpp.run:
+	make $(MAKE_FLAGS) base.run CHKPT=4 APP=471.omnetpp
+	make $(MAKE_FLAGS) base.run CHKPT=2 APP=471.omnetpp
+	make $(MAKE_FLAGS) base.run CHKPT=3 APP=471.omnetpp
+
+473.astar.run:
+	make $(MAKE_FLAGS) base.run CHKPT=6 APP=473.astar
+	make $(MAKE_FLAGS) base.run CHKPT=11 APP=473.astar
+	make $(MAKE_FLAGS) base.run CHKPT=3 APP=473.astar
+	make $(MAKE_FLAGS) base.run CHKPT=7 APP=473.astar
+	make $(MAKE_FLAGS) base.run CHKPT=10 APP=473.astar
+	make $(MAKE_FLAGS) base.run CHKPT=2 APP=473.astar
+
+483.xalancbmk.run:
+	make $(MAKE_FLAGS) base.run CHKPT=7 APP=483.xalancbmk
+	make $(MAKE_FLAGS) base.run CHKPT=2 APP=483.xalancbmk
+	make $(MAKE_FLAGS) base.run CHKPT=9 APP=483.xalancbmk
+	make $(MAKE_FLAGS) base.run CHKPT=6 APP=483.xalancbmk
+	make $(MAKE_FLAGS) base.run CHKPT=4 APP=483.xalancbmk

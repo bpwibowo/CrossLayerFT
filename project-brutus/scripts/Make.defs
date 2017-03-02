@@ -1,0 +1,38 @@
+PARALLEL_JOBS = 4
+CORE_CFG = o2wlslm
+TOOL = svm
+WARM_FLAG = --warm 10000000
+SIM_FLAG = --sim 50000000
+RUN_FLAGS =
+TOOL_FLAGS =
+CHECKPOINT_BIN = ../build/bin/checkpoint
+MAKE_FLAGS = -i
+OPT = onoff
+SIM_DATA = data
+SVM_ONLY_FLAGS = --svm_no_logallinsts --svm_no_reglifedump
+SAMPLING_FLAGS = --svm_adaptive_svf --svm_svf_active_size $(ACTIVE) --svm_svf_rarate $(RARATE)
+ADAPTIVE_10_FLAGS = --svm_adaptive_svf --svm_svf_active_size 16384 --svm_svf_rarate 64 --svm_svf_adaptive_thd 0.1
+ADAPTIVE_5_FLAGS = --svm_adaptive_svf --svm_svf_active_size 16384 --svm_svf_rarate 64 --svm_svf_adaptive_thd 0.05
+THD = 0.05
+DYNAMIC_PROTECTION_FLAGS = --svm_svf_adaptive_thd $(THD)
+
+HPC_DOMAIN = hpc.ncsu.edu
+ifneq ($(shell uname -n | grep $(HPC_DOMAIN)),)
+## Define the following only for HPC
+
+# -- the following definitions are deprecated
+#PREFIX = bsub -q tuck -W 10000 -R "rusage[mem=40000]" -e runjob.%J.err -o runjob.%J.out
+#PREFIX_MCF_SMALL = bsub -q tuck -W 10000 -R "rusage[mem=47000]" -e runjob.%J.err -o runjob.%J.out
+#PREFIX_MCF_MEDIUM = bsub -q tuck -W 10000 -R "rusage[mem=60000]" -e runjob.%J.err -o runjob.%J.out
+#PREFIX_MCF_LARGE = bsub -q tuck -W 10000 -R "rusage[mem=80000]" -e runjob.%J.err -o runjob.%J.out
+#PREFIX = bsub -q tuck -W 10000 -R "rusage[mem=20000]" -e runjob.%J.err -o runjob.%J.out
+
+# -- the following definitions are as suggested by HPC-NCSU support
+TILE = 5 # HPC allocates about 4GB per TILE. Plan accordingly to avoid simulation from crashing!
+Q = #-q tuck # switch between default queue or tuck queue
+BSUB_FLAGS = -n $(TILE) -R "span[ptile=$(TILE)]" -W 5760 -R "oc || hc" $(Q)
+PREFIX = bsub $(BSUB_FLAGS) -e runjob.%J.err -o runjob.%J.out #-R "rusage[mem=20000]"
+PREFIX_MCF_SMALL = bsub $(BSUB_FLAGS) -e runjob.%J.err -o runjob.%J.out #-R "rusage[mem=21000]"
+PREFIX_MCF_MEDIUM = bsub $(BSUB_FLAGS) -e runjob.%J.err -o runjob.%J.out #-R "rusage[mem=22000]"
+PREFIX_MCF_LARGE = bsub $(BSUB_FLAGS) -e runjob.%J.err -o runjob.%J.out #-R "rusage[mem=22000]"
+endif

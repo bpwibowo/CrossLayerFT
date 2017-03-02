@@ -1,0 +1,6 @@
+Jinja2==2.7
+MarkupSafe==0.18
+PyYAML==3.10
+SQLAlchemy==0.8.2
+argparse==1.2.1
+ordereddict==1.1

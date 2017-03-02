@@ -1,0 +1,32 @@
+# IQ
+issueq_int.payloadRAM.ram `SIZE_ISSUEQ `PAYLOAD_PKT_SIZE
+# ROB
+activeList.activeList.ram `SIZE_ACTIVELIST `AL_PKT_SIZE
+activeList.ctrlActiveList.ram `SIZE_ACTIVELIST `EXECUTION_FLAGS
+activeList.executedActiveList.ram `SIZE_ACTIVELIST 1
+activeList.targetAddrActiveList.ram `SIZE_ACTIVELIST `SIZE_PC
+activeList.ldViolateVector.ram `SIZE_ACTIVELIST 1
+# LQ
+lsu.datapath.stx_path.ldqFlags `SIZE_LSQ `EXECUTION_FLAGS
+lsu.datapath.stx_path.ldqPhyDest `SIZE_LSQ `SIZE_PHYSICAL_LOG
+lsu.datapath.stx_path.ldqALid `SIZE_LSQ `SIZE_ACTIVELIST_LOG
+lsu.datapath.stx_path.ldqSize `SIZE_LSQ `LDST_TYPES_LOG
+lsu.datapath.stx_path.ldqAddr `SIZE_LSQ `SIZE_ADDR
+lsu.datapath.stx_path.ldqInsLeft 1 `SIZE_LSQ
+lsu.datapath.stx_path.ldqInsRight 1 `SIZE_LSQ
+lsu.datapath.stx_path.ldqSrc2Data `SIZE_LSQ `SIZE_DATA
+lsu.datapath.stx_path.ldqAddrValid 1 `SIZE_LSQ
+lsu.datapath.stx_path.ldqWriteBack 1 `SIZE_LSQ
+# SQ
+lsu.datapath.stx_path.followingLD `SIZE_LSQ `SIZE_LSQ_LOG
+lsu.datapath.ldx_path.stqSize `SIZE_LSQ `LDST_TYPES_LOG
+lsu.datapath.ldx_path.stqAddr1 `SIZE_LSQ `SIZE_ADDR
+lsu.datapath.ldx_path.stqAddrValid 1 `SIZE_LSQ
+lsu.datapath.ldx_path.stqData `SIZE_LSQ `SIZE_DATA
+lsu.datapath.ldx_path.stqFlags `SIZE_LSQ $bits(stqFlagsPkt)
+lsu.control.stqCommit 1 `SIZE_LSQ
+# RF
+prf_int.PhyRegFile_0.ram `SIZE_PHYSICAL_TABLE `SRAM_DATA_WIDTH
+prf_int.PhyRegFile_1.ram `SIZE_PHYSICAL_TABLE `SRAM_DATA_WIDTH
+prf_int.PhyRegFile_2.ram `SIZE_PHYSICAL_TABLE `SRAM_DATA_WIDTH
+prf_int.PhyRegFile_3.ram `SIZE_PHYSICAL_TABLE `SRAM_DATA_WIDTH+1
